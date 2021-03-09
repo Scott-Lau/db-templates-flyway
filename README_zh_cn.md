@@ -7,7 +7,7 @@
 
 文档
 ---
-本文档也有[英文版本][readme]。
+本文档也有英文版本 [English version][readme]。
 
 待更新。。。
 

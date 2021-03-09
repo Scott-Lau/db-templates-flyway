@@ -8,7 +8,7 @@ This is a template project for database scripts management using [Flyway][flyway
 Documentation
 -------------
 
-This documentation is also available in [Simplified Chinese][readme_zh_cn].
+This documentation is also available in Simplified Chinese [中文版链接][readme_zh_cn].
 
 To be continued...
 
