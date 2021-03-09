@@ -1,21 +1,19 @@
-DB Templates Using Flyway
-=========================
+数据库变更脚本模板（使用Flyway）
+==========================
 
 [![MIT License](https://img.shields.io/github/license/Scott-Lau/db-templates-flyway)][license]
 
-This is a template project for database scripts management using [Flyway][flyway].
+这是一个使用[Flyway][flyway]进行数据库脚本变更管理的模板工程。
 
-Documentation
--------------
+文档
+---
+本文档也有[英文版本][readme]。
 
-This documentation is also available in [Simplified Chinese][readme_zh_cn].
+待更新。。。
 
-To be continued...
-
-License
+协议
 -------
-The project is released under the MIT License. The [MIT license][license] is registered with and approved by the 
-[Open Source Initiative][osi].
+这个工程遵循MIT开源协议. [MIT开源协议][license]已在[Open Source Initiative][osi]注册并获得批准。
 
 
 [home]: https://github.com/Scott-Lau/db-templates-flyway
