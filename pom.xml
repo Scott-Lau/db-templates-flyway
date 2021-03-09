@@ -23,7 +23,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <flyway.schemas>flyway_test</flyway.schemas>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -56,6 +55,9 @@
                         </server>
                     </servers>
                     -->
+                    <schemas>
+                        <schema>flyway_test</schema>
+                    </schemas>
                     <locations>
                         <location>classpath:db/migration</location>
                     </locations>
