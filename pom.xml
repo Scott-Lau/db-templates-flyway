@@ -1,21 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.scottlau</groupId>
-    <artifactId>maven-templates</artifactId>
+    <artifactId>db-templates-flyway</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>maven-templates</name>
-    <url>https://github.com/Scott-Lau/maven-templates</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <name>db-templates-flyway</name>
+    <url>https://github.com/Scott-Lau/db-templates-flyway</url>
     <scm>
-        <connection>scm:git:https://github.com/Scott-Lau/maven-templates.git</connection>
-        <url>https://github.com/Scott-Lau/maven-templates</url>
+        <connection>scm:git:https://github.com/Scott-Lau/db-templates-flyway.git</connection>
+        <url>https://github.com/Scott-Lau/db-templates-flyway</url>
         <tag>master</tag>
     </scm>
     <contributors>
@@ -23,21 +20,45 @@
             <name>Scott Lau</name>
         </contributor>
     </contributors>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <flyway.schemas>flyway_test</flyway.schemas>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>7.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version>
         </dependency>
     </dependencies>
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>7.6.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <url>jdbc:mysql://localhost:3306/flyway_test</url>
+                    <!-- user credential is written in user setting.xml like this:
+                    <servers>
+                        <server>
+                            <id>flyway-db</id>
+                            <username>scott</username>
+                            <password>tiger</password>
+                        </server>
+                    </servers>
+                    -->
+                    <locations>
+                        <location>classpath:db/migration</location>
+                    </locations>
                 </configuration>
             </plugin>
         </plugins>

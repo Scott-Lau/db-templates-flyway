@@ -1,4 +1,3 @@
-
 DB Templates Using Flyway
 =========================
 
@@ -17,7 +16,7 @@ The project is released under the MIT License. The [MIT license][license] is reg
 [Open Source Initiative][osi].
 
 
-[home]: https://github.com/Scott-Lau/maven-templates
+[home]: https://github.com/Scott-Lau/db-templates-flyway
 [license]: https://opensource.org/licenses/MIT
 [osi]: https://opensource.org/
 [flyway]: https://flywaydb.org/
