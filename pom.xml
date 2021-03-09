@@ -47,7 +47,7 @@
                 <version>7.6.0</version>
                 <configuration>
                     <url>jdbc:mysql://localhost:3306/flyway_test</url>
-                    <!-- user credential is written in user setting.xml like this:
+                    <!-- user credential is written in user settings.xml(~/.m2/settings.xml) like this:
                     <servers>
                         <server>
                             <id>flyway-db</id>
