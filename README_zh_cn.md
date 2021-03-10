@@ -3,7 +3,7 @@
 
 [![MIT License](https://img.shields.io/github/license/Scott-Lau/db-templates-flyway-mysql)][license]
 
-这是一个使用[Flyway][flyway]进行数据库脚本变更管理的模板工程。
+这是一个使用[Flyway][flyway]进行MySQL数据库脚本变更管理的模板工程。
 
 文档
 ---
@@ -20,5 +20,6 @@
 [license]: https://opensource.org/licenses/MIT
 [osi]: https://opensource.org/
 [flyway]: https://flywaydb.org/
+[flyway_doc]: https://flywaydb.org/documentation/concepts/migrations
 [readme]: https://github.com/Scott-Lau/db-templates-flyway-mysql/blob/master/README.md
 [readme_zh_cn]: https://github.com/Scott-Lau/db-templates-flyway-mysql/blob/master/README_zh_cn.md

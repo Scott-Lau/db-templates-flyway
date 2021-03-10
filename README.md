@@ -2,13 +2,13 @@
 
 [![MIT License](https://img.shields.io/github/license/Scott-Lau/db-templates-flyway-mysql)][license]
 
-This is a template project for database scripts management using [Flyway][flyway].
+This is a template project for MySQL database scripts management using [Flyway][flyway].
 
 ## Documentation
 
 This documentation is also available in Simplified Chinese [中文版链接][readme_zh_cn].
 
-The following documentation is excerpted from [Flyway][flyway] official site with the exception of *removing undo section*.
+The following documentation is excerpted from [Flyway][flyway_doc] official site with the exception of *removing undo section*.
 
 ### Migrations
 
@@ -141,7 +141,7 @@ Flyway will fail fast and list all files which need to be corrected.
 
 ##### Discovery
 
-Flyway discovers SQL-based migrations from one or more directories referenced by the **[`locations`](/documentation/configuration/parameters/locations)**
+Flyway discovers SQL-based migrations from one or more directories referenced by the `locations`
 property.
 
 - Unprefixed locations or locations with the `classpath:` prefix target the Java classpath.
@@ -164,9 +164,8 @@ property.
   <span><i class="fa fa-folder-open"></i> my-other-folder</span>                  <i class="fa fa-long-arrow-left"></i> <code>filesystem:/my-project/my-other-folder</code>
     <i class="fa fa-file-text"></i> U1.2__Add_constraints.sql
     <i class="fa fa-file-text"></i> V1.2__Add_constraints.sql</pre>
-
 New SQL-based migrations are **discovered automatically** through filesystem and Java classpath scanning at runtime.
-Once you have configured the [`locations`](/documentation/configuration/parameters/locations) you want to use, Flyway will
+Once you have configured the `locations` you want to use, Flyway will
 automatically pick up any new SQL migrations as long as they conform to the configured *naming convention*.
 
 This scanning is recursive. All migrations in non-hidden directories below the specified ones are also picked up.
@@ -178,13 +177,11 @@ Flyway supports all regular SQL syntax elements including:
 - Single- (--) or Multi-line (/* */) comments spanning complete lines
 - Database-specific SQL syntax extensions (PL/SQL, T-SQL, ...) typically used to define stored procedures, packages, ...
 
-Additionally in the case of Oracle, Flyway also supports [SQL*Plus commands](/documentation/database/oracle#sqlplus-commands).
+Additionally in the case of Oracle, Flyway also supports *SQL\*Plus commands*.
 
 ##### Placeholder Replacement
 In addition to regular SQL syntax, Flyway also supports placeholder replacement with configurable pre- and suffixes.
 By default it looks for Ant-style placeholders like `${myplaceholder}`. This can be very useful to abstract differences between environments.
-
-See [Placeholders](/documentation/configuration/placeholder).
 
 #### Java-based migrations
 
@@ -197,37 +194,23 @@ These would typically be things like
 ##### Naming
 
 In order to be picked up by Flyway, Java-based Migrations must implement the
-[`JavaMigration`](/documentation/usage/api/javadoc/org/flywaydb/core/api/migration/JavaMigration) interface. Most users
-however should inherit from the convenience class [`BaseJavaMigration`](/documentation/usage/api/javadoc/org/flywaydb/core/api/migration/BaseJavaMigration)
+`JavaMigration` interface. Most users
+however should inherit from the convenience class `BaseJavaMigration`
 instead as it encourages Flyway's default naming convention, enabling Flyway to automatically extract the version and
 the description from the class name. To be able to do so, the class name must comply with the following naming pattern:
 
-<div class="row">
-    <div class="col-md-4">
-        <h4>Versioned Migrations</h4>
-        <pre>Prefix  Separator
-   <i class="fa fa-long-arrow-down" style="padding: 4px"></i>   <i class="fa fa-long-arrow-down" style="padding: 4px"></i>
-   <span style="color: white; font-weight: bold"><span style="background-color: #0000AA; padding: 4px">V</span><span style="background-color: #AA0000; padding: 4px">2</span><span style="background-color: #00AA00; padding: 4px">__</span><span style="background-color: #AAAA00; padding: 4px">Add_new_table</span></span>
-     <i class="fa fa-long-arrow-up" style="padding: 4px"></i>         <i class="fa fa-long-arrow-up" style="padding: 4px"></i>
- Version    Description</pre>
-    </div>
-    <div class="col-md-4">
-        <h4>Undo Migrations</h4>
-        <pre>Prefix  Separator
-   <i class="fa fa-long-arrow-down" style="padding: 4px"></i>   <i class="fa fa-long-arrow-down" style="padding: 4px"></i>
-   <span style="color: white; font-weight: bold"><span style="background-color: #0000AA; padding: 4px">U</span><span style="background-color: #AA0000; padding: 4px">2</span><span style="background-color: #00AA00; padding: 4px">__</span><span style="background-color: #AAAA00; padding: 4px">Add_new_table</span></span>
-     <i class="fa fa-long-arrow-up" style="padding: 4px"></i>         <i class="fa fa-long-arrow-up" style="padding: 4px"></i>
- Version    Description</pre>
-    </div>
-    <div class="col-md-4">
-        <h4>Repeatable Migrations</h4>
-        <pre>Prefix Separator
-    <i class="fa fa-long-arrow-down" style="padding: 4px"></i> <i class="fa fa-long-arrow-down" style="padding: 4px"></i>
-    <span style="color: white; font-weight: bold"><span style="background-color: #0000AA; padding: 4px">R</span><span style="background-color: #00AA00; padding: 4px">__</span><span style="background-color: #AAAA00; padding: 4px">Add_new_table</span></span>
-               <i class="fa fa-long-arrow-up" style="padding: 4px"></i>
-           Description</pre>
-    </div>
-</div>
+###### Versioned Migrations
+
+Prefix Version Separator Description
+
+Such as: V2__Add_new_table.sql, in which 'V' is prefix, '2' is version, '\_\_' is Separator and 'Add_new_table' is description.
+
+###### Repeatable Migrations
+
+Prefix Separator Description
+
+Such as: R__Create_view.sql, in which 'R' is prefix, '\_\_' is Separator and 'Create_view' is description.
+
 
 The class name consists of the following parts:
 - **Prefix**: `V` for versioned migrations, `U` for undo migrations, `R` for repeatable migrations
@@ -236,7 +219,7 @@ The class name consists of the following parts:
 - **Description**: Underscores (automatically replaced by spaces at runtime) separate the words
 
 If you need more control over the class name, you can override the default convention by implementing the
-[`JavaMigration`](/documentation/usage/api/javadoc/org/flywaydb/core/api/migration/JavaMigration) interface directly.
+`JavaMigration` interface directly.
 
 This will allow you to name your class as you wish. Version, description and migration category are provided by
 implementing the respective methods.
@@ -244,7 +227,7 @@ implementing the respective methods.
 ##### Discovery
 
 Flyway discovers Java-based migrations on the Java classpath in the packages referenced by the
-[`locations`](/documentation/configuration/parameters/locations) property.
+`locations` property.
 
 <pre class="filetree"><i class="fa fa-folder-open"></i> my-project
   <i class="fa fa-folder-open"></i> src
@@ -317,36 +300,18 @@ public class V1_2__Another_user extends BaseJavaMigration {
 }
 ```
 
-#### Script migrations 
-{% include teams.html %}
-
-Sometimes it may be more desirable to use a scripting language for migrations. Flyway Teams currently supports the `.ps1`, `.bat`, `.cmd`, `.sh`, `.bash`, `.py` file extensions as migrations, and on non-windows platforms it also supports migrations without extensions (assuming a valid [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix))).
-
-These migrations follow the same [naming scheme](/documentation/concepts/migrations#naming) as SQL migrations, with only the file extension being different. For example `V1__execute_batch_tool.ps1` is a valid migration.
-
-Script migrations can be used for a number of tasks such as:
-- Triggering execution of a 3rd party application as part of the migrations (such as a batch upload tool)
-- Cleaning up local files (such as those created by SQL*Plus SPOOL)
-
-##### Important notes
-On linux, if executing an extensionless migration that is not set to be executable, Flyway will attempt to set the file to be executable before running it.
-
-The migration checksum is only calculated for the migration itself, not for any files it references or loads.
-
-Script migrations do not support placeholder replacement during execution, but placeholders are considered when calculating checksums so that repeatables may be re-executed.
-
 #### Transactions
 
 By default, Flyway always wraps the execution of an entire migration within a single transaction.
 
 Alternatively you can also configure Flyway to wrap the entire execution of all migrations of a single migration run
-within a single transaction by setting the [`group`](/documentation/configuration/parameters/group) property to `true`.
+within a single transaction by setting the `group` property to `true`.
 
 If Flyway detects that a specific statement cannot be run within a transaction due to technical limitations of your
 database, it won't run that migration within a transaction. Instead it will be marked as *non-transactional*.
 
 By default transactional and non-transactional statements cannot be mixed within a migration run. You can however allow
-this by setting the [`mixed`](/documentation/configuration/parameters/mixed) property to `true`. Note that this is only
+this by setting the `mixed` property to `true`. Note that this is only
 applicable for PostgreSQL, Aurora PostgreSQL, SQL Server and SQLite which all have statements that do not run at all
 within a transaction. This is not to be confused with implicit transaction, as they occur in MySQL or Oracle, where even
 though a DDL statement was run within within a transaction, the database will issue an implicit commit before and after
@@ -357,11 +322,9 @@ its execution.
 If necessary, you can manually determine whether or not to execute a migration in a transaction. This is useful for
 databases like PostgreSQL and SQL Server where certain statements can only execute outside a transaction.
 
-For Java migrations, the `JavaMigration` interface has a method `canExecuteInTransaction`. This determines whether the execution
-should take place inside a transaction. You can rely on `BaseJavaMigration`'s default behavior to return `true` or override
-`canExecuteInTransaction` to execute certain migrations outside a transaction by returning `false`.
+For Java migrations, the `JavaMigration` interface has a method `canExecuteInTransaction`. This determines whether the execution should take place inside a transaction. You can rely on `BaseJavaMigration`'s default behavior to return `true` or override `canExecuteInTransaction` to execute certain migrations outside a transaction by returning `false`.
 
-For SQL migrations, you can specify the script configuration property `executeInTransaction`. See [Script config](/documentation/configuration/scriptconfigfiles).
+For SQL migrations, you can specify the script configuration property `executeInTransaction`.
 ##### Important Note
 
 If your database cleanly supports DDL statements within a transaction, failed migrations will always be rolled back
@@ -370,8 +333,7 @@ If your database cleanly supports DDL statements within a transaction, failed mi
 If on the other hand your database does NOT cleanly supports DDL statements within a transaction (by for example
 issuing an implicit commit before and after every DDL statement), Flyway won't be able to perform a clean rollback in
 case of failure and will instead mark the migration as failed, indicating that some manual cleanup may be required.
-You may also need to run [repair](/documentation/command/repair) to remove the failed migration entry from the [schema
-history table](#schema-history-table).
+You may also need to run repair to remove the failed migration entry from the schema history table.
 
 ## Query Results
 
@@ -380,18 +342,11 @@ the need to visually inspect the result of SQL queries.
 
 There are however some scenarios where such manual inspection makes sense, and therefore Flyway will display query results in the usual tabular form when a `SELECT` statement (or any other statement that returns results) is executed.
 
-### Toggling query results
-{% include teams.html %}
-
-To prevent Flyway from displaying query results, set the configuration option [`outputQueryResults`](/documentation/configuration/parameters/outputQueryResults) to `false`.
-
 ## Schema History Table
 
 To keep track of which migrations have already been applied when and by whom, Flyway adds a special
 **schema history table** to your schema. You can think of this table as a complete audit trail of all changes
 performed against the schema. It also tracks migration checksums and whether or not the migrations were successful.
-
-Read more about this in our getting started guide on [how Flyway works](/documentation/getstarted/how).
 
 #### Schema creation
 
@@ -463,15 +418,12 @@ they are executed again. Note also that changing the value of placeholders will 
 When Flyway discovers an applied versioned migration with a version that is higher than the highest known version
 (this happens typically when a newer version of the software has migrated that schema), that migration is marked as **future**.
 
-When a migration is not found on disk, but is found in the schema history, it is marked as **missing**. By default these will cause *validate* to fail, however they can be marked as **deleted** by using *repair*. See [repair](/documentation/command/repair) for more details.
+When a migration is not found on disk, but is found in the schema history, it is marked as **missing**. By default these will cause *validate* to fail, however they can be marked as **deleted** by using *repair*.
 
 When a migration has had its state changed to deleted by *repair* it is marked as **deleted**.
 
-When using [cherryPick](/documentation/configuration/parameters/cherryPick), if the migration is not in the cherry picked list then it is marked as **ignored**.
+When using *cherryPick*, if the migration is not in the cherry picked list then it is marked as **ignored**.
 
-<p class="next-steps">
-    <a class="btn btn-primary" href="/documentation/concepts/callbacks">Callbacks <i class="fa fa-arrow-right"></i></a>
-</p>
 
 License
 -------
@@ -483,5 +435,6 @@ The project is released under the MIT License. The [MIT license][license] is reg
 [license]: https://opensource.org/licenses/MIT
 [osi]: https://opensource.org/
 [flyway]: https://flywaydb.org/
+[flyway_doc]: https://flywaydb.org/documentation/concepts/migrations
 [readme]: https://github.com/Scott-Lau/db-templates-flyway-mysql/blob/master/README.md
 [readme_zh_cn]: https://github.com/Scott-Lau/db-templates-flyway-mysql/blob/master/README_zh_cn.md
