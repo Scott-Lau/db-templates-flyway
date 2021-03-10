@@ -4,15 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.scottlau</groupId>
-    <artifactId>db-templates-flyway</artifactId>
+    <artifactId>db-templates-flyway-mysql</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>db-templates-flyway</name>
-    <url>https://github.com/Scott-Lau/db-templates-flyway</url>
+    <name>db-templates-flyway-mysql</name>
+    <url>https://github.com/Scott-Lau/db-templates-flyway-mysql</url>
     <scm>
-        <connection>scm:git:https://github.com/Scott-Lau/db-templates-flyway.git</connection>
-        <url>https://github.com/Scott-Lau/db-templates-flyway</url>
+        <connection>scm:git:https://github.com/Scott-Lau/db-templates-flyway-mysql.git</connection>
+        <url>https://github.com/Scott-Lau/db-templates-flyway-mysql</url>
         <tag>master</tag>
     </scm>
     <contributors>

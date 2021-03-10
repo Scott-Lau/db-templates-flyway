@@ -1,6 +1,6 @@
 # DB Templates Using Flyway
 
-[![MIT License](https://img.shields.io/github/license/Scott-Lau/db-templates-flyway)][license]
+[![MIT License](https://img.shields.io/github/license/Scott-Lau/db-templates-flyway-mysql)][license]
 
 This is a template project for database scripts management using [Flyway][flyway].
 
@@ -479,9 +479,9 @@ The project is released under the MIT License. The [MIT license][license] is reg
 [Open Source Initiative][osi].
 
 
-[home]: https://github.com/Scott-Lau/db-templates-flyway
+[home]: https://github.com/Scott-Lau/db-templates-flyway-mysql
 [license]: https://opensource.org/licenses/MIT
 [osi]: https://opensource.org/
 [flyway]: https://flywaydb.org/
-[readme]: https://github.com/Scott-Lau/db-templates-flyway/blob/master/README.md
-[readme_zh_cn]: https://github.com/Scott-Lau/db-templates-flyway/blob/master/README_zh_cn.md
+[readme]: https://github.com/Scott-Lau/db-templates-flyway-mysql/blob/master/README.md
+[readme_zh_cn]: https://github.com/Scott-Lau/db-templates-flyway-mysql/blob/master/README_zh_cn.md
